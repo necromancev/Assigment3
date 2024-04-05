@@ -1,12 +1,12 @@
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Ignore;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
@@ -114,15 +114,7 @@ public class WaresPageTests {
         dropDownBar.click();
         WebElement cleanBtn = webDriver.findElement(By.id("reset"));
         cleanBtn.click();
-        String expectedMessage = "no such element: Unable to locate element: {\"method\":\"xpath\",\"selector\":\"/html/body/div/div[2]/div/table/tbody/tr[5]/td[1]\"}";
-        try{
-        webDriver.findElement(By.xpath("/html/body/div/div[2]/div/table/tbody/tr[5]/td[1]"));
-        } catch (NoSuchElementException ex){
-            String message = ex.getMessage();
-            Assertions.assertTrue(message.contains(expectedMessage));
-        }
-        //System.out.println(message);
-        System.out.println("later");
+        Assertions.assertThrows(NoSuchElementException.class, () -> webDriver.findElement(By.xpath("/html/body/div/div[2]/div/table/tbody/tr[5]/td[1]")));
     }
 
 
