@@ -1,7 +1,4 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,15 +10,13 @@ public class WaresPageTests {
 
     private static WebDriver webDriver;
 
-/*    @BeforeAll
+    @BeforeAll
     public static void setUp(){
         webDriver = new ChromeDriver();
-        openThePageAndMaximize();
-    }*/
+    }
 
     @BeforeEach
-    public void setUpp(){
-        webDriver = new ChromeDriver();
+    public void setUpBeforeEach(){
         openThePageAndMaximize();
     }
 
@@ -66,6 +61,10 @@ public class WaresPageTests {
     }
 
 
+    @AfterAll
+    public static void afterAll(){
+        webDriver.quit();
+    }
     public static void openThePageAndMaximize(){
         webDriver.get("http://localhost:8080");
         webDriver.manage().window().maximize();
