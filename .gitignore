@@ -1,0 +1,7 @@
+# folder ignoring
+target
+.idea
+
+# file ignoring
+*.war
+*.jar
