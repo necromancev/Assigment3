@@ -5,9 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.Ignore;
-
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class WaresPageTests {
@@ -16,13 +13,13 @@ public class WaresPageTests {
 
     @BeforeAll
     public static void setUp(){
-        webDriver = new ChromeDriver();
     }
 
     @BeforeEach
     public void setUpBeforeEach(){
+        webDriver = new ChromeDriver();
         openThePageAndMaximize();
-        webDriver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+        webDriver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
     }
 
     @Test
@@ -98,7 +95,6 @@ public class WaresPageTests {
     }
 
     @Test
-    @Ignore
     public void listIsEmptyAfterCleaning(){
         openTheWaresPage();
         WebElement addBtn = webDriver.findElement(By.xpath("/html/body/div/div[2]/div/div[1]/button"));
@@ -118,9 +114,14 @@ public class WaresPageTests {
     }
 
 
+    @AfterEach
+    public void afterEach(){
+        webDriver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+        webDriver.close();
+    }
+
     @AfterAll
     public static void afterAll(){
-        webDriver.quit();
     }
     public static void openThePageAndMaximize(){
         webDriver.get("http://localhost:8080");
@@ -133,4 +134,5 @@ public class WaresPageTests {
         WebElement waresButton = webDriver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[2]/div/a[1]"));
         waresButton.click();
     }
+
 }
